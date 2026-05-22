@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HostelHive — Girls Hostel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --lav: #b8a9e8;
+  --lav-light: #ede9fb;
+  --lav-mid: #9b8edc;
+  --lav-deep: #7c6dcc;
+  --purple: #6a4fbf;
+  --purple-dark: #3d2885;
+  --purple-ink: #1e1040;
+  --accent: #c4b5f5;
+  --accent2: #e0d7ff;
+  --cream: #f5f2fd;
+  --white: #ffffff;
+  --text: #1e1040;
+  --text-muted: #6b5ea8;
+  --text-soft: #a094cc;
+  --border: rgba(120,90,200,0.13);
+  --border-strong: rgba(120,90,200,0.28);
+  --shadow: 0 8px 40px rgba(80,50,180,0.14);
+  --shadow-card: 0 4px 24px rgba(80,50,180,0.10);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-xs: 8px;
+  --glass: rgba(255,255,255,0.76);
+  --glass-border: rgba(180,160,255,0.35);
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  --grad: linear-gradient(135deg,var(--lav-deep),var(--purple-dark));
+  --grad2: linear-gradient(135deg,var(--lav-mid),var(--purple));
+}
+[data-theme="dark"] {
+  --cream: #100a24;
+  --white: #1a1136;
+  --text: #e8e0ff;
+  --text-muted: #c0b0e8;
+  --text-soft: #7a6aaa;
+  --border: rgba(160,130,255,0.12);
+  --border-strong: rgba(160,130,255,0.22);
+  --glass: rgba(26,17,54,0.88);
+  --glass-border: rgba(180,150,255,0.12);
+  --shadow: 0 8px 40px rgba(0,0,0,0.5);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.35);
+  --lav-light: #1e1650;
+  --accent2: #201550;
+  --cream: #0d0820;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.7;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--lav-mid);border-radius:99px;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);display:flex;align-items:center;justify-content:space-between;height:64px;transition:background var(--transition);}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:1.5rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.02em; position: relative; z-index: 1001;}
+.nav-links{display:flex;gap:0.2rem;list-style:none;}
+.nav-links a{display:block;padding:0.45rem 0.95rem;border-radius:99px;font-size:0.87rem;font-weight:500;color:var(--text-muted);text-decoration:none;transition:all var(--transition);}
+.nav-links a:hover,.nav-links a.active{background:var(--lav-light);color:var(--purple);}
+.nav-actions{display:flex;align-items:center;gap:0.75rem; position: relative; z-index: 1001;}
+.theme-toggle{width:40px;height:22px;border-radius:99px;background:var(--lav-mid);border:none;cursor:pointer;position:relative;transition:background var(--transition);}
+.theme-toggle::after{content:'';position:absolute;left:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform var(--transition);}
+[data-theme="dark"] .theme-toggle{background:var(--purple);}
+[data-theme="dark"] .theme-toggle::after{transform:translateX(18px);}
+.btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.5rem 1.25rem;border-radius:99px;font-size:0.88rem;font-weight:500;font-family:inherit;border:none;cursor:pointer;transition:all var(--transition);text-decoration:none;white-space:nowrap;}
+.btn-primary{background:var(--grad);color:#fff;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(100,70,200,0.4);}
+.btn-outline{background:transparent;border:1.5px solid var(--border-strong);color:var(--text-muted);}
+.btn-outline:hover{border-color:var(--purple);color:var(--purple);background:var(--lav-light);}
+.notif-btn{position:relative;width:36px;height:36px;border-radius:50%;background:var(--lav-light);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all var(--transition);}
+.notif-btn:hover{background:var(--accent);}
+.badge{position:absolute;top:-2px;right:-2px;width:16px;height:16px;border-radius:50%;background:var(--purple);color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.menu-toggle{display:none;background:transparent;border:none;font-size:1.5rem;cursor:pointer;color:var(--text);margin-left:0.5rem;}
+
+/* SECTIONS */
+section{position:relative;z-index:1;}
+.container{max-width:1160px;margin:0 auto;padding:0 2rem;}
+.section-label{display:inline-flex;align-items:center;gap:0.5rem;padding:0.35rem 1rem;border-radius:99px;background:var(--lav-light);color:var(--purple);font-size:0.78rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:1rem;}
+.section-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,4vw,3rem);line-height:1.15;letter-spacing:-0.03em;color:var(--text);margin-bottom:0.5rem;}
+.section-subtitle{color:var(--text-muted);font-size:1rem;max-width:540px;}
+
+/* HERO */
+#home{min-height:100vh;padding-top:64px;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:4rem;padding-left:2rem;padding-right:2rem;max-width:1160px;margin:0 auto;}
+.hero-content{padding:4rem 0;}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;padding:0.4rem 1rem;border-radius:99px;background:var(--lav-light);color:var(--purple);font-size:0.82rem;font-weight:600;margin-bottom:1.5rem;}
+.hero-title{font-family:'DM Serif Display',serif;font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.1;letter-spacing:-0.04em;margin-bottom:1.25rem;}
+.hero-title em{font-style:italic;color:var(--lav-deep);}
+.hero-desc{color:var(--text-muted);font-size:1.05rem;max-width:440px;margin-bottom:2rem;}
+.hero-btns{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:3rem;}
+.stats-row{display:flex;gap:2rem;flex-wrap:wrap;}
+.stat-num{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text);letter-spacing:-0.03em;}
+.stat-label{font-size:0.8rem;color:var(--text-muted);}
+.hero-visual{position:relative;padding:2rem 0;display:flex;align-items:center;justify-content:center;}
+.hero-card-main{width:320px;height:400px;border-radius:28px;background:linear-gradient(145deg,var(--lav-light),var(--accent2));border:1.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:7rem;position:relative;overflow:hidden;box-shadow:var(--shadow);}
+.hero-card-main::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(180,160,255,0.2),rgba(100,70,190,0.15));}
+.hero-float-card{position:absolute;background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:var(--radius-sm);padding:0.85rem 1.1rem;box-shadow:var(--shadow-card);animation:float 4s ease-in-out infinite;}
+.hero-float-card:nth-child(2){top:10%;right:-20px;animation-delay:.8s;}
+.hero-float-card:nth-child(3){bottom:20%;left:-24px;animation-delay:1.6s;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.float-title{font-size:0.75rem;font-weight:600;color:var(--text);}
+.float-sub{font-size:0.68rem;color:var(--text-muted);}
+.float-icon{font-size:1.4rem;margin-bottom:0.2rem;}
+
+/* CARDS */
+.card{background:var(--glass);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all var(--transition);box-shadow:var(--shadow-card);}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--border-strong);}
+
+/* FACILITIES */
+#facilities{padding:6rem 0;}
+.facilities-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem;margin-top:3rem;}
+.facility-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem 1.5rem;text-align:center;transition:all var(--transition);position:relative;overflow:hidden;}
+.facility-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity var(--transition);}
+.facility-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.facility-card:hover::before{opacity:1;}
+.facility-card.f1::before{background:linear-gradient(135deg,rgba(180,160,240,0.18),transparent);}
+.facility-card.f2::before{background:linear-gradient(135deg,rgba(140,110,220,0.18),transparent);}
+.facility-card.f3::before{background:linear-gradient(135deg,rgba(100,70,190,0.15),transparent);}
+.facility-card.f4::before{background:linear-gradient(135deg,rgba(200,185,255,0.2),transparent);}
+.facility-card.f5::before{background:linear-gradient(135deg,rgba(160,130,255,0.18),transparent);}
+.facility-card.f6::before{background:linear-gradient(135deg,rgba(60,30,130,0.12),transparent);}
+.facility-icon{font-size:2.4rem;margin-bottom:0.75rem;position:relative;}
+.facility-name{font-weight:600;font-size:0.95rem;color:var(--text);margin-bottom:0.25rem;position:relative;}
+.facility-desc{font-size:0.82rem;color:var(--text-muted);position:relative;}
+
+/* 3D MAP */
+#map3d{padding:6rem 0;background:var(--white);}
+.map-layout{display:grid;grid-template-columns:1fr 340px;gap:2rem;margin-top:2.5rem;align-items:start;}
+#hostelCanvas{width:100%;height:520px;border-radius:var(--radius);border:1px solid var(--border);background:#0d0820;cursor:grab;display:block;}
+#hostelCanvas:active{cursor:grabbing;}
+.map-legend{display:flex;flex-direction:column;gap:0.75rem;}
+.legend-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1rem 1.25rem;cursor:pointer;transition:all var(--transition);}
+.legend-card:hover,.legend-card.active{border-color:var(--purple);background:var(--lav-light);}
+.legend-dot{width:14px;height:14px;border-radius:4px;flex-shrink:0;}
+.legend-header{display:flex;align-items:center;gap:0.65rem;margin-bottom:0.3rem;}
+.legend-name{font-weight:600;font-size:0.88rem;}
+.legend-desc{font-size:0.78rem;color:var(--text-muted);}
+.map-controls{display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap;}
+.map-ctrl-btn{padding:0.35rem 0.85rem;border-radius:99px;border:1px solid var(--border-strong);background:var(--cream);font-size:0.78rem;font-weight:500;cursor:pointer;font-family:inherit;color:var(--text-muted);transition:all var(--transition);}
+.map-ctrl-btn:hover{background:var(--lav-light);color:var(--purple);border-color:var(--purple);}
+.map-ctrl-btn.active{background:var(--grad);color:#fff;border-color:transparent;}
+
+/* ROOMS */
+#rooms{padding:6rem 0;}
+.rooms-filter{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:2.5rem;margin-top:2rem;}
+.filter-btn{padding:0.4rem 1rem;border-radius:99px;background:var(--cream);border:1px solid var(--border-strong);font-size:0.82rem;font-weight:500;cursor:pointer;font-family:inherit;color:var(--text-muted);transition:all var(--transition);}
+.filter-btn.active,.filter-btn:hover{background:var(--grad);color:#fff;border-color:transparent;}
+.rooms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;}
+.room-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all var(--transition);}
+.room-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.room-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;}
+.room-img.r1{background:linear-gradient(135deg,var(--lav-light),var(--accent2));}
+.room-img.r2{background:linear-gradient(135deg,var(--accent2),rgba(100,70,190,0.12));}
+.room-img.r3{background:linear-gradient(135deg,rgba(140,110,220,0.15),var(--lav-light));}
+.room-img.r4{background:linear-gradient(135deg,rgba(100,70,190,0.1),var(--accent2));}
+.avail-badge{position:absolute;top:12px;right:12px;padding:0.25rem 0.7rem;border-radius:99px;font-size:0.72rem;font-weight:600;}
+.avail-badge.available{background:#e0f5ec;color:#1a6e3a;}
+.avail-badge.limited{background:#f5f0dc;color:#7a5200;}
+.avail-badge.booked{background:#f5e0e8;color:#8b1f4a;}
+.room-info{padding:1.25rem;}
+.room-name{font-weight:600;font-size:1rem;margin-bottom:0.25rem;}
+.room-price{color:var(--purple);font-weight:700;font-size:1.1rem;margin-bottom:0.75rem;}
+.room-price span{font-size:0.75rem;font-weight:400;color:var(--text-muted);}
+.room-features{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.room-tag{padding:0.2rem 0.6rem;border-radius:99px;background:var(--lav-light);color:var(--purple);font-size:0.72rem;font-weight:500;}
+.room-stars{color:#8b5cf6;font-size:0.85rem;margin-bottom:1rem;}
+
+/* DASHBOARD */
+#dashboard{padding:6rem 0;background:var(--white);}
+.dashboard-layout{display:grid;grid-template-columns:220px 1fr;gap:2rem;margin-top:2.5rem;}
+.sidebar{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;height:fit-content;}
+.sidebar-profile{text-align:center;margin-bottom:1.5rem;}
+.avatar{width:72px;height:72px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 0.75rem;border:3px solid var(--glass-border);}
+.profile-name{font-weight:600;font-size:0.95rem;}
+.profile-room{font-size:0.8rem;color:var(--text-muted);}
+.sidebar-nav{list-style:none;}
+.sidebar-nav li a{display:flex;align-items:center;gap:0.6rem;padding:0.6rem 0.85rem;border-radius:var(--radius-sm);color:var(--text-muted);text-decoration:none;font-size:0.88rem;transition:all var(--transition);margin-bottom:0.2rem;}
+.sidebar-nav li a:hover,.sidebar-nav li a.active{background:var(--lav-light);color:var(--purple);font-weight:500;}
+.dashboard-main{display:flex;flex-direction:column;gap:1.5rem;}
+.dash-widgets{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;}
+.widget{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.25rem;text-align:center;}
+.widget-icon{font-size:1.8rem;margin-bottom:0.5rem;}
+.widget-val{font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--text);}
+.widget-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.1rem;}
+.dash-grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.dash-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;}
+.dash-card-title{font-weight:600;font-size:0.95rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:0.5rem;}
+.menu-day{display:flex;gap:0.75rem;margin-bottom:0.75rem;align-items:flex-start;}
+.menu-dot{width:8px;height:8px;border-radius:50%;margin-top:0.45rem;flex-shrink:0;}
+.menu-dot.b{background:var(--accent);}.menu-dot.l{background:var(--lav-mid);}.menu-dot.d{background:var(--purple);}
+.menu-meal{font-size:0.85rem;font-weight:500;}
+.menu-items{font-size:0.78rem;color:var(--text-muted);}
+.notif-list{list-style:none;}
+.notif-item{display:flex;gap:0.75rem;padding:0.75rem 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+.notif-item:last-child{border-bottom:none;}
+.notif-dot{width:8px;height:8px;border-radius:50%;background:var(--purple);margin-top:0.45rem;flex-shrink:0;}
+.notif-text{font-size:0.83rem;}
+.notif-time{font-size:0.72rem;color:var(--text-muted);margin-top:0.1rem;}
+.progress-item{margin-bottom:1rem;}
+.progress-label{display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:0.4rem;}
+.progress-bar{height:6px;background:var(--border);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;border-radius:99px;transition:width 1.5s cubic-bezier(0.4,0,0.2,1);}
+.progress-fill.p1{background:linear-gradient(90deg,var(--lav-mid),var(--purple));}
+.progress-fill.p2{background:linear-gradient(90deg,var(--purple),var(--purple-dark));}
+.progress-fill.p3{background:linear-gradient(90deg,var(--accent),var(--lav-deep));}
+
+/* COMPLAINTS */
+#complaints{padding:6rem 0;}
+.complaints-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+.complaint-form label{display:block;font-size:0.85rem;font-weight:500;margin-bottom:0.4rem;color:var(--text-muted);}
+.complaint-form input,.complaint-form select,.complaint-form textarea{width:100%;padding:0.7rem 1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--cream);font-family:inherit;font-size:0.9rem;color:var(--text);transition:border-color var(--transition);margin-bottom:1rem;}
+.complaint-form input:focus,.complaint-form select:focus,.complaint-form textarea:focus{outline:none;border-color:var(--purple);}
+.complaint-form textarea{resize:vertical;min-height:90px;}
+.priority-tags{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;}
+.priority-tag{padding:0.3rem 0.8rem;border-radius:99px;font-size:0.78rem;font-weight:600;cursor:pointer;border:1.5px solid transparent;transition:all var(--transition);}
+.priority-tag.low{background:#e8f5e9;color:#2e7d32;border-color:#c8e6c9;}
+.priority-tag.medium{background:#f5f0dc;color:#7a5200;border-color:#e0d080;}
+.priority-tag.high{background:var(--lav-light);color:var(--purple-dark);border-color:var(--lav-mid);}
+.priority-tag.selected{box-shadow:0 0 0 2px currentColor;}
+.complaint-list{display:flex;flex-direction:column;gap:1rem;}
+.complaint-item{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;}
+.complaint-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;}
+.complaint-title{font-weight:600;font-size:0.9rem;}
+.status-badge{padding:0.2rem 0.65rem;border-radius:99px;font-size:0.72rem;font-weight:600;}
+.status-badge.submitted{background:var(--lav-light);color:var(--purple-dark);}
+.status-badge.in-progress{background:#fff8e1;color:#e65100;}
+.status-badge.resolved{background:#e8f5e9;color:#2e7d32;}
+.complaint-cat{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.75rem;}
+.complaint-timeline{display:flex;gap:0;}
+.timeline-step{flex:1;text-align:center;position:relative;}
+.timeline-step::before{content:'';position:absolute;top:8px;left:50%;right:-50%;height:2px;background:var(--border);}
+.timeline-step:last-child::before{display:none;}
+.timeline-step.done::before{background:var(--purple);}
+.timeline-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);background:var(--white);margin:0 auto 4px;position:relative;z-index:1;transition:all var(--transition);}
+.timeline-step.done .timeline-dot{border-color:var(--purple);background:var(--purple);}
+.timeline-label{font-size:0.65rem;color:var(--text-muted);}
+
+/* MEALS */
+#meals{padding:6rem 0;background:var(--white);}
+.meals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem;margin-top:2.5rem;}
+.meal-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;text-align:center;transition:all var(--transition);}
+.meal-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.meal-emoji{font-size:3rem;margin-bottom:0.75rem;}
+.meal-name{font-weight:600;font-size:0.95rem;margin-bottom:0.25rem;}
+.meal-desc{font-size:0.8rem;color:var(--text-muted);margin-bottom:1rem;}
+.vote-bar-wrap{height:6px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:0.5rem;}
+.vote-bar{height:100%;border-radius:99px;background:var(--grad);}
+.vote-count{font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;}
+.emoji-votes{display:flex;justify-content:center;gap:0.5rem;}
+.emoji-btn{padding:0.35rem 0.6rem;border-radius:99px;font-size:1rem;border:1.5px solid var(--border);background:var(--white);cursor:pointer;transition:all var(--transition);display:flex;align-items:center;gap:0.3rem;}
+.emoji-btn span{font-size:0.72rem;color:var(--text-muted);font-family:'DM Sans',sans-serif;}
+.emoji-btn:hover{transform:scale(1.1);border-color:var(--lav-mid);background:var(--lav-light);}
+.emoji-btn.voted{border-color:var(--purple);background:var(--lav-light);}
+
+/* EVENTS */
+#events{padding:6rem 0;}
+.calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.cal-nav-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border-strong);background:var(--cream);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-muted);transition:all var(--transition);}
+.cal-nav-btn:hover{background:var(--lav-light);color:var(--purple);}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+.cal-day-name{text-align:center;font-size:0.75rem;font-weight:600;color:var(--text-muted);padding:0.5rem 0;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-xs);font-size:0.85rem;cursor:pointer;transition:all var(--transition);position:relative;}
+.cal-day:hover{background:var(--lav-light);color:var(--purple);}
+.cal-day.today{background:var(--grad);color:#fff;font-weight:600;}
+.cal-day.has-event::after{content:'';position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%;background:var(--purple);}
+.cal-day.today::after{background:#fff;}
+.cal-day.other-month{color:var(--text-soft);}
+.events-list{display:flex;flex-direction:column;gap:0.75rem;margin-top:1.5rem;}
+.event-item{display:flex;gap:1rem;padding:1rem 1.25rem;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-sm);align-items:center;transition:all var(--transition);}
+.event-item:hover{border-color:var(--purple);transform:translateX(4px);}
+.event-date-box{min-width:48px;text-align:center;padding:0.5rem;border-radius:var(--radius-sm);background:var(--lav-light);}
+.event-date-day{font-family:'DM Serif Display',serif;font-size:1.4rem;color:var(--purple);line-height:1;}
+.event-date-mon{font-size:0.68rem;color:var(--text-muted);text-transform:uppercase;font-weight:600;}
+.event-info{flex:1;}
+.event-name{font-weight:600;font-size:0.92rem;}
+.event-loc{font-size:0.78rem;color:var(--text-muted);}
+.event-cat{padding:0.2rem 0.65rem;border-radius:99px;font-size:0.72rem;font-weight:600;}
+.event-cat.social{background:var(--lav-light);color:var(--purple);}
+.event-cat.academic{background:rgba(100,70,190,0.1);color:var(--purple-dark);}
+.event-cat.sports{background:#e8f5e9;color:#2d6e35;}
+.event-cat.cultural{background:rgba(180,160,255,0.2);color:var(--lav-deep);}
+.events-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+
+/* ROOMMATE */
+#roommate{padding:6rem 0;background:var(--white);}
+.roommate-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2.5rem;}
+.match-form{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;}
+.match-form label{display:block;font-size:0.85rem;font-weight:500;margin-bottom:0.5rem;color:var(--text-muted);}
+.match-form select{width:100%;padding:0.65rem 1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--white);font-family:inherit;font-size:0.9rem;color:var(--text);margin-bottom:1rem;}
+.match-form select:focus{outline:none;border-color:var(--purple);}
+.hobby-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+.hobby-tag{padding:0.3rem 0.8rem;border-radius:99px;font-size:0.78rem;border:1.5px solid var(--border-strong);cursor:pointer;transition:all var(--transition);background:var(--white);color:var(--text-muted);}
+.hobby-tag.selected{background:var(--lav-light);border-color:var(--purple);color:var(--purple);font-weight:600;}
+.match-results{display:flex;flex-direction:column;gap:1rem;}
+.match-card{background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:center;transition:all var(--transition);}
+.match-card:hover{border-color:var(--purple);transform:translateX(4px);}
+.match-avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;}
+.match-info{flex:1;min-width:0;}
+.match-name{font-weight:600;font-size:0.95rem;}
+.match-dept{font-size:0.78rem;color:var(--text-muted);margin-bottom:0.5rem;}
+.match-tags{display:flex;gap:0.35rem;flex-wrap:wrap;}
+.match-tag{padding:0.15rem 0.55rem;border-radius:99px;font-size:0.7rem;background:var(--lav-light);color:var(--purple);font-weight:500;}
+.compat-ring{width:56px;height:56px;border-radius:50%;margin:0 auto;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;position:relative;}
+.compat-ring::before{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--cream);}
+.compat-ring span{position:relative;font-size:0.72rem;font-weight:700;color:var(--purple);}
+
+/* TESTIMONIALS */
+#testimonials{padding:6rem 0;}
+.testi-slider{position:relative;overflow:hidden;margin-top:2.5rem;}
+.testi-track{display:flex;gap:1.5rem;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
+.testi-card{min-width:340px;max-width:340px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;}
+.testi-stars{color:#8b5cf6;font-size:0.9rem;margin-bottom:0.75rem;}
+.testi-text{font-size:0.9rem;color:var(--text-muted);margin-bottom:1.25rem;font-style:italic;line-height:1.7;}
+.testi-author{display:flex;gap:0.75rem;align-items:center;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.testi-name{font-weight:600;font-size:0.88rem;}
+.testi-course{font-size:0.75rem;color:var(--text-muted);}
+.testi-controls{display:flex;gap:0.5rem;justify-content:center;margin-top:1.5rem;}
+.testi-dot{width:8px;height:8px;border-radius:99px;background:var(--border);cursor:pointer;transition:all var(--transition);border:none;}
+.testi-dot.active{background:var(--purple);width:24px;}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;display:flex;flex-direction:column;gap:0.5rem;}
+.toast{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-border);border-radius:var(--radius-sm);padding:0.85rem 1.25rem;min-width:260px;max-width:320px;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.75rem;animation:slideIn 0.4s cubic-bezier(0.4,0,0.2,1);font-size:0.88rem;}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast.exit{animation:slideOut 0.4s cubic-bezier(0.4,0,0.2,1) forwards;}
+@keyframes slideOut{to{transform:translateX(120%);opacity:0}}
+.toast-icon{font-size:1.2rem;flex-shrink:0;}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(20,10,50,0.65);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity var(--transition);padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--white);border-radius:var(--radius);padding:2rem;max-width:480px;width:100%;transform:scale(0.95) translateY(20px);transition:transform var(--transition);box-shadow:0 24px 80px rgba(60,30,130,0.25);}
+.modal-overlay.open .modal{transform:scale(1) translateY(0);}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
+.modal-title{font-family:'DM Serif Display',serif;font-size:1.4rem;}
+.modal-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--border-strong);background:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--text-muted);transition:all var(--transition);}
+.modal-close:hover{background:var(--cream);color:var(--text);}
+.modal-form label{display:block;font-size:0.85rem;font-weight:500;margin-bottom:0.4rem;color:var(--text-muted);}
+.modal-form input,.modal-form select{width:100%;padding:0.7rem 1rem;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--cream);font-family:inherit;font-size:0.9rem;color:var(--text);transition:border-color var(--transition);margin-bottom:1rem;}
+.modal-form input:focus,.modal-form select:focus{outline:none;border-color:var(--purple);}
+.success-anim{text-align:center;padding:1.5rem 0;}
+.success-anim .big-emoji{font-size:4rem;animation:bounce 0.6s cubic-bezier(0.36,0.07,0.19,0.97);}
+@keyframes bounce{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+
+/* CHATBOT */
+.chatbot-fab{position:fixed;bottom:2rem;left:2rem;z-index:1500;width:56px;height:56px;border-radius:50%;background:var(--grad);border:none;cursor:pointer;box-shadow:0 8px 24px rgba(80,50,180,0.5);display:flex;align-items:center;justify-content:center;font-size:1.6rem;transition:all var(--transition);}
+.chatbot-fab:hover{transform:scale(1.1);}
+.chatbot-fab .fab-badge{position:absolute;top:-2px;right:-2px;width:16px;height:16px;border-radius:50%;background:var(--purple-dark);border:2px solid var(--white);}
+.chatbot-window{position:fixed;bottom:5.5rem;left:2rem;z-index:1500;width:320px;height:450px;border-radius:var(--radius);background:var(--white);border:1px solid var(--border);box-shadow:var(--shadow);display:flex;flex-direction:column;transform:scale(0.9) translateY(20px);opacity:0;pointer-events:none;transition:all var(--transition);overflow:hidden;}
+.chatbot-window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
+.chatbot-header{padding:1rem 1.25rem;background:var(--grad);display:flex;align-items:center;gap:0.75rem;color:#fff;}
+.chatbot-avatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.chatbot-name{font-weight:600;font-size:0.92rem;}
+.chatbot-status{font-size:0.72rem;opacity:0.85;}
+.chatbot-close{margin-left:auto;background:none;border:none;color:#fff;cursor:pointer;font-size:1.2rem;opacity:0.85;}
+.chatbot-messages{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.75rem;}
+.msg{max-width:80%;}
+.msg.bot{align-self:flex-start;}
+.msg.user{align-self:flex-end;}
+.msg-bubble{padding:0.6rem 0.9rem;border-radius:var(--radius-sm);font-size:0.85rem;line-height:1.5;}
+.msg.bot .msg-bubble{background:var(--lav-light);color:var(--text);border-radius:4px 16px 16px 16px;}
+.msg.user .msg-bubble{background:var(--grad);color:#fff;border-radius:16px 4px 16px 16px;}
+.msg-time{font-size:0.65rem;color:var(--text-soft);margin-top:0.2rem;}
+.msg.user .msg-time{text-align:right;}
+.typing-dots{display:flex;gap:3px;padding:0.6rem 0.9rem;}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:var(--purple);animation:typingDot 1.2s infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.chatbot-suggestions{display:flex;gap:0.4rem;padding:0.5rem 1rem;flex-wrap:wrap;border-top:1px solid var(--border);}
+.chat-suggest{padding:0.3rem 0.7rem;border-radius:99px;font-size:0.72rem;background:var(--lav-light);color:var(--purple);border:1px solid var(--lav-mid);cursor:pointer;font-family:inherit;transition:all var(--transition);}
+.chat-suggest:hover{background:var(--purple);color:#fff;}
+.chatbot-input{display:flex;gap:0.5rem;padding:0.75rem 1rem;border-top:1px solid var(--border);}
+.chatbot-input input{flex:1;padding:0.5rem 0.9rem;border-radius:99px;border:1.5px solid var(--border-strong);background:var(--cream);font-family:inherit;font-size:0.85rem;color:var(--text);}
+.chatbot-input input:focus{outline:none;border-color:var(--purple);}
+.chatbot-send{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;background:var(--grad);color:#fff;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all var(--transition);}
+.chatbot-send:hover{transform:scale(1.1);}
+
+/* FOOTER */
+footer{padding:4rem 0 2rem;background:var(--purple-ink);color:rgba(255,255,255,0.8);position:relative;}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--lav-mid),transparent);}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+.footer-brand{font-family:'DM Serif Display',serif;font-size:1.6rem;color:#fff;margin-bottom:0.75rem;}
+.footer-desc{font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.7;}
+.footer-heading{font-weight:600;font-size:0.88rem;color:#fff;margin-bottom:1rem;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+.footer-links a{font-size:0.85rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color var(--transition);}
+.footer-links a:hover{color:var(--accent);}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.8rem;color:rgba(255,255,255,0.3);}
+
+/* BLOBS */
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.25;pointer-events:none;z-index:0;}
+.blob-a{background:var(--lav);}
+.blob-b{background:var(--purple);}
+.blob-c{background:var(--purple-dark);}
+
+/* ANIMATIONS */
+.fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE UPGRADES */
+@media(max-width:960px){
+  #home{grid-template-columns:1fr;padding-top:80px;text-align:center;}
+  .hero-visual{display:none;}
+  .hero-btns{justify-content:center;}
+  .stats-row{justify-content:center;}
+  .dashboard-layout{grid-template-columns:1fr;}
+  
+  /* Restored Sidebar on Mobile */
+  .sidebar{display:block; width:100%; margin-bottom: 2rem;}
+  
+  .dash-grid2{grid-template-columns:1fr;}
+  .complaints-layout{grid-template-columns:1fr;}
+  .events-layout{grid-template-columns:1fr;}
+  .roommate-layout{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  
+  /* Mobile Hamburger Menu Overrides */
+  .menu-toggle {display:block;}
+  .nav-links{
+    position:absolute; top:64px; left:0; right:0; background:var(--glass); 
+    backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+    flex-direction:column; padding:1.5rem; gap:1rem; border-bottom:1px solid var(--glass-border);
+    transform:translateY(-150%); opacity:0; pointer-events:none;
+    transition:all var(--transition); box-shadow:var(--shadow-card);
+  }
+  .nav-links.open { transform:translateY(0); opacity:1; pointer-events:all; }
+  .nav-links a { font-size: 1.1rem; padding: 0.75rem 1rem; text-align: center; }
+  
+  .map-layout{grid-template-columns:1fr;}
+  #hostelCanvas{height:360px;}
+}
+
+@media(max-width:600px){
+  .container{padding:0 1.25rem;}
+  nav{padding:0 1.25rem;}
+  
+  /* Reduced massive vertical paddings for mobile */
+  section { padding: 4rem 0; }
+  #home { padding-top: 5rem; }
+  
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .modal{padding:1.5rem; max-width: 90%;}
+  
+  /* Adjusted Chatbot dimensions */
+  .chatbot-window { width: calc(100vw - 3rem); left: 1.5rem; bottom: 5rem;}
+  .chatbot-fab { bottom: 1.5rem; left: 1.5rem; }
+  
+  /* Responsive Testimonials scaling */
+  .testi-card { min-width: 280px; max-width: 280px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">🐝 HostelHive</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#map3d">3D Map</a></li>
+    <li><a href="#rooms">Rooms</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#complaints">Complaints</a></li>
+    <li><a href="#meals">Meals</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#roommate">Roommate</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="notif-btn" id="notifBtn">🔔<span class="badge" id="notifCount">3</span></button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"></button>
+    <a href="#rooms" class="btn btn-primary" style="display:none; /* Kept clean for mobile space */">Book</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<div class="blob blob-a" style="width:700px;height:700px;top:-150px;right:-250px;"></div>
+<div class="blob blob-b" style="width:500px;height:500px;top:55%;left:-180px;"></div>
+<div class="blob blob-c" style="width:350px;height:350px;top:30%;right:5%;"></div>
+
+<section id="home">
+  <div class="hero-content fade-in">
+    <div class="hero-tag">🐝 Trusted by 500+ Students</div>
+    <h1 class="hero-title">Safe, Smart &<br><em>Comfortable</em><br>Living</h1>
+    <p class="hero-desc">HostelHive is your nurturing home-away-from-home — 24/7 security, modern amenities, and a vibrant community of learners.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="openBooking()">🛏️ Book a Room</button>
+      <a href="#map3d" class="btn btn-outline">🗺️ View 3D Map →</a>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="stat-num" data-count="500">0</div><div class="stat-label">Students</div></div>
+      <div class="stat-item"><div class="stat-num">24/7</div><div class="stat-label">Security</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="98">0</div><div class="stat-label">% Satisfaction</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="120">0</div><div class="stat-label">Rooms</div></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-card-main">
+      <span style="position:relative">🏠</span>
+      <div class="hero-float-card">
+        <div class="float-icon">🛡️</div>
+        <div class="float-title">24/7 Security</div>
+        <div class="float-sub">Always safe</div>
+      </div>
+      <div class="hero-float-card">
+        <div class="float-icon">⭐</div>
+        <div class="float-title">4.9 Rating</div>
+        <div class="float-sub">500+ reviews</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="facilities">
+  <div class="container">
+    <div class="section-label">🏡 Facilities</div>
+    <h2 class="section-title fade-in">Everything You Need,<br>Under One Roof</h2>
+    <p class="section-subtitle fade-in">Modern amenities designed for student comfort, safety, and success.</p>
+    <div class="facilities-grid">
+      <div class="facility-card f1 fade-in"><div class="facility-icon">🛜</div><div class="facility-name">High-Speed WiFi</div><div class="facility-desc">1 Gbps fiber for seamless studying & streaming</div></div>
+      <div class="facility-card f2 fade-in"><div class="facility-icon">🍽️</div><div class="facility-name">Mess & Dining</div><div class="facility-desc">Nutritious meals thrice daily with weekly menus</div></div>
+      <div class="facility-card f3 fade-in"><div class="facility-icon">🧺</div><div class="facility-name">Laundry</div><div class="facility-desc">Automated machines, 24-hour availability</div></div>
+      <div class="facility-card f4 fade-in"><div class="facility-icon">📚</div><div class="facility-name">Study Lounge</div><div class="facility-desc">Quiet, well-lit spaces open round the clock</div></div>
+      <div class="facility-card f5 fade-in"><div class="facility-icon">🏥</div><div class="facility-name">Medical Room</div><div class="facility-desc">On-call nurse & first aid always available</div></div>
+      <div class="facility-card f6 fade-in"><div class="facility-icon">🎮</div><div class="facility-name">Recreation Zone</div><div class="facility-desc">Games, TV lounge & hobby corner</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="map3d">
+  <div class="container">
+    <div class="section-label">🗺️ Hostel Map</div>
+    <h2 class="section-title fade-in">Interactive 3D Campus Map</h2>
+    <p class="section-subtitle fade-in">Explore HostelHive's layout — drag to rotate, scroll to zoom, click a building to learn more.</p>
+    <div class="map-layout" style="margin-top:2rem;">
+      <div>
+        <canvas id="hostelCanvas"></canvas>
+        <div class="map-controls">
+          <button class="map-ctrl-btn active" id="btnOrbit">🔄 Orbit</button>
+          <button class="map-ctrl-btn" id="btnTop">⬆️ Top View</button>
+          <button class="map-ctrl-btn" id="btnFront">🏠 Front View</button>
+          <button class="map-ctrl-btn" id="btnReset">↩️ Reset</button>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:1rem;color:var(--text);">Campus Buildings</div>
+        <div class="map-legend" id="mapLegend"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rooms">
+  <div class="container">
+    <div class="section-label">🛏️ Rooms</div>
+    <h2 class="section-title fade-in">Find Your Perfect Space</h2>
+    <p class="section-subtitle fade-in">Browse available rooms and book instantly.</p>
+    <div class="rooms-filter">
+      <button class="filter-btn active" data-filter="all">All Rooms</button>
+      <button class="filter-btn" data-filter="single">Single</button>
+      <button class="filter-btn" data-filter="shared">Shared</button>
+      <button class="filter-btn" data-filter="ac">AC</button>
+      <button class="filter-btn" data-filter="non-ac">Non-AC</button>
+    </div>
+    <div class="rooms-grid" id="roomsGrid"></div>
+  </div>
+</section>
+
+<section id="dashboard">
+  <div class="container">
+    <div class="section-label">📊 Dashboard</div>
+    <h2 class="section-title fade-in">Student Dashboard</h2>
+    <p class="section-subtitle fade-in">Your personal hostel control center.</p>
+    <div class="dashboard-layout">
+      <aside class="sidebar fade-in">
+        <div class="sidebar-profile">
+          <div class="avatar">👩</div>
+          <div class="profile-name">Aisha Siddiqui</div>
+          <div class="profile-room">Room 204 · Block B</div>
+        </div>
+        <ul class="sidebar-nav">
+          <li><a href="#" class="active">🏠 Overview</a></li>
+          <li><a href="#rooms">🛏️ My Room</a></li>
+          <li><a href="#complaints">🔧 Complaints</a></li>
+          <li><a href="#meals">🍽️ Meal Menu</a></li>
+          <li><a href="#events">📅 Events</a></li>
+          <li><a href="#roommate">👭 Roommate</a></li>
+          <li><a href="#">💳 Payments</a></li>
+          <li><a href="#">📋 Leave Form</a></li>
+        </ul>
+      </aside>
+      <div class="dashboard-main fade-in">
+        <div class="dash-widgets">
+          <div class="widget"><div class="widget-icon">🛏️</div><div class="widget-val">204</div><div class="widget-label">My Room</div></div>
+          <div class="widget"><div class="widget-icon">🔧</div><div class="widget-val" id="pendingCount">2</div><div class="widget-label">Pending Complaints</div></div>
+          <div class="widget"><div class="widget-icon">📅</div><div class="widget-val">3</div><div class="widget-label">Upcoming Events</div></div>
+          <div class="widget"><div class="widget-icon">💳</div><div class="widget-val">₨0</div><div class="widget-label">Dues</div></div>
+        </div>
+        <div class="dash-grid2">
+          <div class="dash-card">
+            <div class="dash-card-title">🍽️ Today's Menu</div>
+            <div class="menu-day"><div class="menu-dot b"></div><div><div class="menu-meal">Breakfast · 7–9 AM</div><div class="menu-items">Paratha, Omelette, Chai, Fruit</div></div></div>
+            <div class="menu-day"><div class="menu-dot l"></div><div><div class="menu-meal">Lunch · 12:30–2 PM</div><div class="menu-items">Daal, Roti, Salad, Raita</div></div></div>
+            <div class="menu-day"><div class="menu-dot d"></div><div><div class="menu-meal">Dinner · 7–8:30 PM</div><div class="menu-items">Chicken Karahi, Naan, Dessert</div></div></div>
+          </div>
+          <div class="dash-card">
+            <div class="dash-card-title">🔔 Notifications</div>
+            <ul class="notif-list">
+              <li class="notif-item"><div class="notif-dot"></div><div><div class="notif-text">Maintenance visit scheduled for your floor</div><div class="notif-time">2 hours ago</div></div></li>
+              <li class="notif-item"><div class="notif-dot" style="background:var(--lav-mid)"></div><div><div class="notif-text">Cultural Fest registrations open!</div><div class="notif-time">Yesterday</div></div></li>
+              <li class="notif-item"><div class="notif-dot" style="background:var(--accent)"></div><div><div class="notif-text">Mess menu updated for next week</div><div class="notif-time">2 days ago</div></div></li>
+            </ul>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-title">📈 Monthly Summary</div>
+          <div class="progress-item"><div class="progress-label"><span>Attendance</span><span>92%</span></div><div class="progress-bar"><div class="progress-fill p1" style="width:0%" data-width="92%"></div></div></div>
+          <div class="progress-item"><div class="progress-label"><span>Meal Participation</span><span>87%</span></div><div class="progress-bar"><div class="progress-fill p2" style="width:0%" data-width="87%"></div></div></div>
+          <div class="progress-item"><div class="progress-label"><span>Payment Status</span><span>100%</span></div><div class="progress-bar"><div class="progress-fill p3" style="width:0%" data-width="100%"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="complaints">
+  <div class="container">
+    <div class="section-label">🔧 Complaints</div>
+    <h2 class="section-title fade-in">Complaint Tracker</h2>
+    <p class="section-subtitle fade-in">Submit issues and track them in real-time.</p>
+    <div class="complaints-layout">
+      <div class="fade-in">
+        <div class="card complaint-form">
+          <h3 style="font-weight:600;margin-bottom:1.25rem;">Submit a Complaint</h3>
+          <label>Category</label>
+          <select id="complaintCat"><option value="">Select category...</option><option>WiFi Issues</option><option>Electricity</option><option>Water / Plumbing</option><option>Cleanliness</option><option>Furniture</option><option>Other</option></select>
+          <label>Priority</label>
+          <div class="priority-tags">
+            <div class="priority-tag low" data-priority="low">🟢 Low</div>
+            <div class="priority-tag medium" data-priority="medium">🟡 Medium</div>
+            <div class="priority-tag high" data-priority="high">🔴 High</div>
+          </div>
+          <label>Description</label>
+          <textarea id="complaintDesc" placeholder="Describe the issue..."></textarea>
+          <label>Upload Photo (optional)</label>
+          <input type="file" accept="image/*" style="font-size:0.82rem;padding:0.5rem;">
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;" onclick="submitComplaint()">Submit Complaint →</button>
+        </div>
+      </div>
+      <div class="fade-in">
+        <h3 style="font-weight:600;margin-bottom:1.25rem;">My Complaints</h3>
+        <div class="complaint-list" id="complaintList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="meals">
+  <div class="container">
+    <div class="section-label">🍽️ Meal Voting</div>
+    <h2 class="section-title fade-in">Vote for Your Favorites</h2>
+    <p class="section-subtitle fade-in">Help shape the weekly menu — your taste matters!</p>
+    <div class="meals-grid" id="mealsGrid"></div>
+  </div>
+</section>
+
+<section id="events" style="background:var(--white);">
+  <div class="container">
+    <div class="section-label">📅 Events</div>
+    <h2 class="section-title fade-in">What's Happening</h2>
+    <p class="section-subtitle fade-in">Stay connected with hostel life.</p>
+    <div class="events-layout">
+      <div class="fade-in">
+        <div class="card" style="padding:1.5rem;">
+          <div class="calendar-header">
+            <button class="cal-nav-btn" id="prevMonth">‹</button>
+            <div style="font-weight:600;" id="calMonthYear">May 2026</div>
+            <button class="cal-nav-btn" id="nextMonth">›</button>
+          </div>
+          <div class="calendar-grid" id="calGrid"></div>
+        </div>
+      </div>
+      <div class="fade-in"><div class="events-list" id="eventsList"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="roommate">
+  <div class="container">
+    <div class="section-label">👭 Roommate</div>
+    <h2 class="section-title fade-in">Find Your Match</h2>
+    <p class="section-subtitle fade-in">Connect with compatible roommates based on lifestyle.</p>
+    <div class="roommate-layout">
+      <div class="match-form fade-in">
+        <h3 style="font-weight:600;margin-bottom:1.25rem;">Your Preferences</h3>
+        <label>Study Habits</label>
+        <select id="studyHabit"><option>Early Bird (6 AM–2 PM)</option><option>Regular (9 AM–6 PM)</option><option>Night Owl (After 9 PM)</option></select>
+        <label>Sleep Schedule</label>
+        <select id="sleepSchedule"><option>Early (Before 10 PM)</option><option>Regular (11 PM–12 AM)</option><option>Late (After 12 AM)</option></select>
+        <label>Cleanliness Level</label>
+        <select id="cleanliness"><option>Very Neat</option><option>Average</option><option>Relaxed</option></select>
+        <label>Personality</label>
+        <select id="personality"><option>Introvert</option><option>Ambivert</option><option>Extrovert</option></select>
+        <label>Hobbies</label>
+        <div class="hobby-tags" id="hobbyTags">
+          <div class="hobby-tag" data-hobby="reading">📚 Reading</div>
+          <div class="hobby-tag" data-hobby="music">🎵 Music</div>
+          <div class="hobby-tag" data-hobby="art">🎨 Art</div>
+          <div class="hobby-tag" data-hobby="fitness">💪 Fitness</div>
+          <div class="hobby-tag" data-hobby="cooking">🍳 Cooking</div>
+          <div class="hobby-tag" data-hobby="gaming">🎮 Gaming</div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.75rem;" onclick="findMatches()">Find Matches ✨</button>
+      </div>
+      <div class="fade-in"><div class="match-results" id="matchResults"><p style="color:var(--text-muted);font-size:0.9rem;">Set your preferences and click <strong>Find Matches</strong> to discover compatible roommates.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" style="background:var(--white);">
+  <div class="container">
+    <div class="section-label">💬 Testimonials</div>
+    <h2 class="section-title fade-in">Girls Love HostelHive</h2>
+    <div class="testi-slider fade-in">
+      <div class="testi-track" id="testiTrack"></div>
+      <div class="testi-controls" id="testiControls"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">🐝 HostelHive</div>
+        <p class="footer-desc">A safe, modern, and vibrant home for girl students. Designed for comfort, built for community.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#map3d">3D Map</a></li>
+          <li><a href="#rooms">Rooms</a></li>
+          <li><a href="#events">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Support</div>
+        <ul class="footer-links">
+          <li><a href="#complaints">Submit Complaint</a></li>
+          <li><a href="#">Fee Payment</a></li>
+          <li><a href="#">Leave Form</a></li>
+          <li><a href="#">Emergency</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <ul class="footer-links">
+          <li><a href="#">📞 +92 3161267270</a></li>
+          <li><a href="#">noorulhud664@gmail.com</a></li>
+          <li><a href="#">📍 University Campus, Block A</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 HostelHive. All rights reserved.</div>
+      <div>Made with 💜 for students</div>
+    </div>
+  </div>
+</footer>
+
+<button class="chatbot-fab" id="chatbotFab">💬<div class="fab-badge"></div></button>
+<div class="chatbot-window" id="chatbotWindow">
+  <div class="chatbot-header">
+    <div class="chatbot-avatar">👩‍💼</div>
+    <div><div class="chatbot-name">Hive Assistant</div><div class="chatbot-status">● Online</div></div>
+    <button class="chatbot-close" id="chatbotClose">✕</button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages"></div>
+  <div class="chatbot-suggestions" id="chatSuggestions"></div>
+  <div class="chatbot-input">
+    <input type="text" placeholder="Ask me anything..." id="chatInput">
+    <button class="chatbot-send" id="chatSend">➤</button>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalRoomTitle">Book a Room</div>
+      <button class="modal-close" onclick="closeBooking()">✕</button>
+    </div>
+    <div id="bookingContent">
+      <div class="modal-form">
+        <label>Full Name</label><input type="text" id="bookName" placeholder="Fatima Khan">
+        <label>Student ID</label><input type="text" id="bookId" placeholder="2024-CS-001">
+        <label>Contact Number</label><input type="text" id="bookPhone" placeholder="+92 300 0000000">
+        <label>Department</label>
+        <select id="bookDept"><option>Computer Science</option><option>Business Administration</option><option>Engineering</option><option>Medicine</option><option>Arts & Humanities</option></select>
+        <label>Check-in Date</label><input type="date" id="bookDate">
+        <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+          <button class="btn btn-outline" style="flex:1;justify-content:center;" onclick="closeBooking()">Cancel</button>
+          <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="confirmBooking()">Confirm →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// Mobile Hamburger Menu Setup
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close mobile menu when a link is clicked
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+  });
+});
+
+// ═══════════════════════════════════════
+//  3D MAP  (Three.js)
+// ═══════════════════════════════════════
+const buildings = [
+  { id:'blockA', name:'Block A — Rooms 101–150', color:0x9b8edc, hcolor:0xc4b5f5, pos:[0,0,0], size:[3.2,2.8,2], icon:'🛏️', desc:'50 single & shared rooms, ground–2nd floor' },
+  { id:'blockB', name:'Block B — Rooms 201–250', color:0x7c6dcc, hcolor:0xb8a9e8, pos:[5,0,0], size:[3.2,3.4,2], icon:'🛏️', desc:'50 rooms with attached baths, 1st–3rd floor' },
+  { id:'dining', name:'Dining Hall & Mess', color:0x5a3fb0, hcolor:0x9b8edc, pos:[-4.8,0,0], size:[3,1.4,2.5], icon:'🍽️', desc:'Capacity 200 students, 3 meals daily' },
+  { id:'library', name:'Study Lounge & Library', color:0x3d2885, hcolor:0x7c6dcc, pos:[0,0,4.8], size:[2.8,1.6,2], icon:'📚', desc:'Open 24/7 — 80 study seats, fast WiFi' },
+  { id:'medical', name:'Medical & Admin Block', color:0x6a4fbf, hcolor:0xb8a9e8, pos:[5,0,4.8], size:[2.4,1.8,2], icon:'🏥', desc:'Nurse on duty, first aid, warden office' },
+  { id:'sports', name:'Sports & Recreation', color:0x4a3490, hcolor:0x9b8edc, pos:[-4.8,0,4.8], size:[3.5,1.2,3], icon:'🏸', desc:'Badminton, table tennis, gym & TV lounge' },
+  { id:'laundry', name:'Laundry & Services', color:0x8570d8, hcolor:0xc4b5f5, pos:[2.5,0,9], size:[2,1,2], icon:'🧺', desc:'10 washing machines, open 6AM–10PM' },
+  { id:'gate', name:'Main Gate & Security', color:0x2a1a60, hcolor:0x6a4fbf, pos:[-2,0,9], size:[1.6,1,1], icon:'🛡️', desc:'24/7 security, biometric entry' },
+];
+
+const canvas = document.getElementById('hostelCanvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 2, 0.1, 200);
+
+function resizeCanvas() {
+  const w = canvas.parentElement.clientWidth;
+  // Dynamic height handling for mobile map
+  const h = window.innerWidth <= 960 ? 360 : Math.min(520, window.innerHeight * 0.6);
+  renderer.setSize(w, h, false);
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+
+// Sky / fog
+scene.background = new THREE.Color(0x0d0820);
+scene.fog = new THREE.FogExp2(0x0d0820, 0.032);
+
+// Lights
+const ambient = new THREE.AmbientLight(0xc4b5f5, 0.5);
+scene.add(ambient);
+const dir = new THREE.DirectionalLight(0xffffff, 1.2);
+dir.position.set(10, 18, 10);
+dir.castShadow = true;
+scene.add(dir);
+const purple_fill = new THREE.PointLight(0x7c6dcc, 1.5, 30);
+purple_fill.position.set(-5, 6, 2);
+scene.add(purple_fill);
+const accent_fill = new THREE.PointLight(0xc4b5f5, 0.8, 25);
+accent_fill.position.set(8, 4, 8);
+scene.add(accent_fill);
+
+// Ground
+const groundGeo = new THREE.PlaneGeometry(40, 40);
+const groundMat = new THREE.MeshLambertMaterial({ color:0x120a30 });
+const ground = new THREE.Mesh(groundGeo, groundMat);
+ground.rotation.x = -Math.PI / 2;
+ground.receiveShadow = true;
+scene.add(ground);
+
+// Grid lines on ground
+const gridHelper = new THREE.GridHelper(40, 20, 0x2a1a60, 0x1a0e40);
+gridHelper.position.y = 0.01;
+scene.add(gridHelper);
+
+// Paths (flat boxes connecting buildings)
+const pathMat = new THREE.MeshLambertMaterial({ color:0x1e1050 });
+const paths = [
+  [2.4, 0.03, 0,   2.8, 0.06, 0.4],
+  [0,   0.03, 2.4, 0.4, 0.06, 2.8],
+  [-2.4,0.03, 0,   2.8, 0.06, 0.4],
+  [0,   0.03, 0,   0.4, 0.06, 9],
+];
+paths.forEach(([x,y,z,w,h,d]) => {
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), pathMat);
+  m.position.set(x,y,z);
+  scene.add(m);
+});
+
+// Build buildings
+const meshes = {};
+buildings.forEach(b => {
+  const [w,h,d] = b.size;
+  const geo = new THREE.BoxGeometry(w, h, d);
+
+  // Walls
+  const mat = new THREE.MeshPhongMaterial({ color:b.color, shininess:40 });
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(b.pos[0], h/2, b.pos[2]);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  mesh.userData = b;
+  scene.add(mesh);
+  meshes[b.id] = mesh;
+
+  // Roof — slightly lighter
+  const roofGeo = new THREE.BoxGeometry(w+0.1, 0.12, d+0.1);
+  const roofMat = new THREE.MeshPhongMaterial({ color:b.hcolor, shininess:60 });
+  const roof = new THREE.Mesh(roofGeo, roofMat);
+  roof.position.set(b.pos[0], h+0.06, b.pos[2]);
+  scene.add(roof);
+
+  // Windows (small emissive planes)
+  const winMat = new THREE.MeshBasicMaterial({ color:0xede9fb, transparent:true, opacity:0.85 });
+  for (let r = 0; r < Math.min(3, Math.floor(h)); r++) {
+    for (let c = 0; c < Math.floor(w * 0.8); c++) {
+      const win = new THREE.Mesh(new THREE.PlaneGeometry(0.22, 0.22), winMat);
+      win.position.set(b.pos[0] - w/2*0.65 + c*0.5, 0.4 + r*0.7, b.pos[2] + d/2 + 0.01);
+      scene.add(win);
+    }
+  }
+});
+
+// Camera setup
+camera.position.set(8, 12, 18);
+camera.lookAt(0, 0, 4);
+
+// Orbit controls (manual)
+let isDragging = false, prevMouse = {x:0, y:0};
+let theta = 0.5, phi = 0.9, radius = 22;
+let targetTheta = theta, targetPhi = phi, targetRadius = radius;
+let autoRotate = true;
+
+function updateCamera() {
+  camera.position.x = radius * Math.sin(phi) * Math.sin(theta);
+  camera.position.y = radius * Math.cos(phi);
+  camera.position.z = radius * Math.sin(phi) * Math.cos(theta);
+  camera.lookAt(0, 1.5, 4);
+}
+
+canvas.addEventListener('mousedown', e => { isDragging = true; autoRotate = false; prevMouse = {x:e.clientX, y:e.clientY}; });
+canvas.addEventListener('touchstart', e => { isDragging = true; autoRotate = false; prevMouse = {x:e.touches[0].clientX, y:e.touches[0].clientY}; });
+window.addEventListener('mouseup', () => isDragging = false);
+window.addEventListener('touchend', () => isDragging = false);
+canvas.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  const dx = e.clientX - prevMouse.x, dy = e.clientY - prevMouse.y;
+  targetTheta -= dx * 0.008;
+  targetPhi = Math.max(0.2, Math.min(1.4, targetPhi + dy * 0.006));
+  prevMouse = {x:e.clientX, y:e.clientY};
+});
+canvas.addEventListener('touchmove', e => {
+  if (!isDragging) return;
+  const dx = e.touches[0].clientX - prevMouse.x, dy = e.touches[0].clientY - prevMouse.y;
+  targetTheta -= dx * 0.008; targetPhi = Math.max(0.2, Math.min(1.4, targetPhi + dy * 0.006));
+  prevMouse = {x:e.touches[0].clientX, y:e.touches[0].clientY};
+  e.preventDefault();
+}, {passive:false});
+canvas.addEventListener('wheel', e => { targetRadius = Math.max(8, Math.min(40, targetRadius + e.deltaY * 0.04)); });
+
+// Click detection
+const raycaster = new THREE.Raycaster();
+const mouse2d = new THREE.Vector2();
+let activeBuilding = null;
+canvas.addEventListener('click', e => {
+  const rect = canvas.getBoundingClientRect();
+  mouse2d.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse2d.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  raycaster.setFromCamera(mouse2d, camera);
+  const hits = raycaster.intersectObjects(Object.values(meshes));
+  if (hits.length > 0) {
+    const b = hits[0].object.userData;
+    activeBuilding = b.id;
+    showToast(`${b.icon} ${b.name} — ${b.desc}`, '🗺️');
+    highlightBuilding(b.id);
+    document.querySelectorAll('.legend-card').forEach(c => c.classList.toggle('active', c.dataset.id === b.id));
+  }
+});
+
+function highlightBuilding(id) {
+  Object.entries(meshes).forEach(([k, m]) => {
+    const b = buildings.find(b => b.id === k);
+    m.material.color.setHex(k === id ? b.hcolor : b.color);
+    m.material.emissive = new THREE.Color(k === id ? 0x3a2870 : 0x000000);
+  });
+}
+
+// Preset views
+document.getElementById('btnTop').addEventListener('click', () => {
+  autoRotate = false; targetPhi = 0.22; targetRadius = 28; targetTheta = 0;
+  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnTop').classList.add('active');
+});
+document.getElementById('btnFront').addEventListener('click', () => {
+  autoRotate = false; targetPhi = 1.3; targetRadius = 24; targetTheta = 0;
+  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnFront').classList.add('active');
+});
+document.getElementById('btnReset').addEventListener('click', () => {
+  autoRotate = true; targetPhi = 0.9; targetRadius = 22; targetTheta = 0.5;
+  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnReset').classList.add('active');
+  Object.entries(meshes).forEach(([k, m]) => {
+    const b = buildings.find(b => b.id === k);
+    m.material.color.setHex(b.color);
+    m.material.emissive = new THREE.Color(0x000000);
+  });
+  document.querySelectorAll('.legend-card').forEach(c => c.classList.remove('active'));
+});
+document.getElementById('btnOrbit').addEventListener('click', () => {
+  autoRotate = true;
+  document.querySelectorAll('.map-ctrl-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btnOrbit').classList.add('active');
+});
+
+// Legend
+const legendContainer = document.getElementById('mapLegend');
+buildings.forEach(b => {
+  const c = document.createElement('div');
+  c.className = 'legend-card'; c.dataset.id = b.id;
+  const col = '#' + b.color.toString(16).padStart(6,'0');
+  c.innerHTML = `<div class="legend-header"><div class="legend-dot" style="background:${col}"></div><div class="legend-name">${b.icon} ${b.name.split('—')[0].trim()}</div></div><div class="legend-desc">${b.desc}</div>`;
+  c.addEventListener('click', () => {
+    autoRotate = false;
+    document.querySelectorAll('.legend-card').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    highlightBuilding(b.id);
+    showToast(`${b.icon} ${b.name} — ${b.desc}`, '🗺️');
+  });
+  legendContainer.appendChild(c);
+});
+
+// Animate loop
+let animFrame;
+function animate() {
+  animFrame = requestAnimationFrame(animate);
+  if (autoRotate) targetTheta += 0.003;
+  theta += (targetTheta - theta) * 0.06;
+  phi += (targetPhi - phi) * 0.06;
+  radius += (targetRadius - radius) * 0.06;
+  updateCamera();
+  if (activeBuilding && meshes[activeBuilding]) {
+    const t = Date.now() * 0.002;
+    meshes[activeBuilding].material.emissive.setRGB(0.12 + 0.06*Math.sin(t), 0.06, 0.25 + 0.1*Math.sin(t));
+  }
+  renderer.render(scene, camera);
+}
+animate();
+
+// ═══════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════
+const rooms = [
+  {id:1,name:'Hive Single AC',type:'single',ac:true,price:12000,img:'r1',rating:4.8,cap:1,avail:'available',features:['Single Bed','AC','Attached Bath','WiFi']},
+  {id:2,name:'Lavender Shared',type:'shared',ac:false,price:7500,img:'r2',rating:4.5,cap:2,avail:'available',features:['Shared','Fan','Common Bath','WiFi']},
+  {id:3,name:'Purple Suite',type:'single',ac:true,price:15000,img:'r3',rating:4.9,cap:1,avail:'limited',features:['Single Bed','AC','Attached Bath','Balcony']},
+  {id:4,name:'Violet Shared AC',type:'shared',ac:true,price:9500,img:'r4',rating:4.6,cap:3,avail:'available',features:['Shared','AC','Common Bath','Study Table']},
+  {id:5,name:'Garden View',type:'single',ac:false,price:8500,img:'r1',rating:4.4,cap:1,avail:'booked',features:['Single Bed','Fan','Common Bath','Garden View']},
+  {id:6,name:'Bloom Triple',type:'shared',ac:true,price:8000,img:'r2',rating:4.7,cap:3,avail:'limited',features:['Triple Shared','AC','Attached Bath','WiFi']},
+];
+const meals = [
+  {emoji:'🍚',name:'Chicken Biryani',desc:'Special dum biryani, Friday special',votes:142,userVote:null},
+  {emoji:'🫕',name:'Daal Makhani',desc:'Creamy lentils with naan',votes:89,userVote:null},
+  {emoji:'🥗',name:'Fresh Salad Bowl',desc:'Seasonal veggies, light dressing',votes:67,userVote:null},
+  {emoji:'🍜',name:'Pasta Arabiata',desc:'Spicy tomato pasta, garlic bread',votes:103,userVote:null},
+  {emoji:'🫔',name:'Club Sandwich',desc:'Grilled chicken, veggies, sauces',votes:78,userVote:null},
+  {emoji:'🍮',name:'Kheer',desc:'Rice pudding, rose essence',votes:121,userVote:null},
+];
+const events = [
+  {day:17,month:'May',name:'Movie Night 🎬',loc:'Common Room',cat:'social'},
+  {day:21,month:'May',name:'Study Marathon 📚',loc:'Library Hall',cat:'academic'},
+  {day:24,month:'May',name:'Sports Day 🏸',loc:'Sports Ground',cat:'sports'},
+  {day:28,month:'May',name:'Cultural Fest 🎭',loc:'Auditorium',cat:'cultural'},
+  {day:31,month:'May',name:'Birthday Bash 🎂',loc:'Dining Hall',cat:'social'},
+];
+const complaints = [
+  {id:'#001',title:'WiFi Router Down on 2nd Floor',cat:'WiFi Issues',status:'in-progress',steps:2},
+  {id:'#002',title:'Broken Desk Chair in Room 204',cat:'Furniture',status:'submitted',steps:1},
+];
+const testimonials = [
+  {text:'HostelHive changed my university life. The security is top-notch and the staff genuinely cares. I feel so at home here!',name:'Fatima K.',course:'CS Final Year',avatar:'👩‍💻',bg:'var(--lav-light)'},
+  {text:'The WiFi is blazing fast, the food is actually good (rare!), and I found my best friend through the roommate system. 10/10!',name:'Zainab A.',course:'Business 3rd Year',avatar:'👩‍🎓',bg:'var(--accent2)'},
+  {text:'I was nervous about hostel life but HostelHive made me feel so welcome. The study lounge is my favourite spot.',name:'Sara M.',course:'Medicine 2nd Year',avatar:'👩‍⚕️',bg:'var(--lav-light)'},
+  {text:'Complaint resolution is actually fast here! My WiFi issue was fixed within 2 hours. Impressed!',name:'Hira R.',course:'Engineering 1st Year',avatar:'👩‍🔬',bg:'var(--accent2)'},
+];
+const potentialRoommates = [
+  {name:'Noor Fatima',dept:'Computer Science',hobbies:['reading','music'],compat:92,avatar:'👩‍💻',bg:'var(--lav-light)'},
+  {name:'Amna Sheikh',dept:'Arts & Humanities',hobbies:['art','music'],compat:85,avatar:'🎨',bg:'var(--accent2)'},
+  {name:'Zara Malik',dept:'Business Admin',hobbies:['fitness','cooking'],compat:74,avatar:'💼',bg:'var(--lav-light)'},
+  {name:'Hania Tariq',dept:'Medicine',hobbies:['reading','fitness'],compat:88,avatar:'👩‍⚕️',bg:'var(--accent2)'},
+];
+const chatResponses = {
+  curfew:'The curfew timing is 10:00 PM on weekdays and 11:00 PM on weekends. Late passes can be requested 24 hours in advance. 🌙',
+  menu:"Today's menu: Breakfast (7–9 AM) — Paratha, Omelette, Chai. Lunch (12:30–2 PM) — Daal, Roti, Salad. Dinner (7–8:30 PM) — Chicken Karahi, Naan, Dessert. 🍽️",
+  book:'To book a room, scroll to the Rooms section and click "Book Now". Fill in your details and you\'ll get confirmation instantly! 🛏️',
+  complaint:'Click the Complaints section, fill in the category, priority and description, and submit! You can track status in real-time. 🔧',
+  wifi:'The WiFi network is HostelHive_Secure. Password on your welcome card. Issues? Submit a complaint — we respond within 2 hours! 🛜',
+  fee:'Room fees are due on the 5th of each month. Pay via bank transfer or the online portal. Contact admin@hostelhive.edu for queries. 💳',
+  laundry:'Laundry room is on the ground floor, open 6 AM–10 PM. Washing machines are free; dryers cost ₨50 per load. 🧺',
+  emergency:'Warden — ext. 100, Security — ext. 101, Medical room — ext. 102. External: call 1122 or 115. 🆘',
+};
+const chatSuggestions = ['Curfew timing?','Today\'s menu?','Book a room','File a complaint','WiFi password','Emergency contacts'];
+
+// ═══════════════════════════════════════
+//  RENDER FUNCTIONS
+// ═══════════════════════════════════════
+function renderRooms(filter='all') {
+  const grid = document.getElementById('roomsGrid');
+  const list = filter==='all'?rooms:rooms.filter(r=>{
+    if(filter==='single') return r.type==='single';
+    if(filter==='shared') return r.type==='shared';
+    if(filter==='ac') return r.ac;
+    if(filter==='non-ac') return !r.ac;
+    return true;
+  });
+  grid.innerHTML = list.map(r=>`
+    <div class="room-card fade-in">
+      <div class="room-img ${r.img}"><span>🛏️</span>
+        <span class="avail-badge ${r.avail}">${r.avail==='available'?'✓ Available':r.avail==='limited'?'⚡ Limited':'✗ Booked'}</span>
+      </div>
+      <div class="room-info">
+        <div class="room-name">${r.name}</div>
+        <div class="room-price">₨${r.price.toLocaleString()}<span>/month</span></div>
+        <div class="room-features">${r.features.map(f=>`<span class="room-tag">${f}</span>`).join('')}</div>
+        <div class="room-stars">${'★'.repeat(Math.floor(r.rating))}☆ ${r.rating}</div>
+        <button class="btn ${r.avail==='booked'?'btn-outline':'btn-primary'}" style="width:100%;justify-content:center;"
+          onclick="${r.avail!=='booked'?`openBooking('${r.name}')`:`showToast('This room is fully booked.','⚠️')`}">${r.avail==='booked'?'Fully Booked':'Book Now →'}</button>
+      </div>
+    </div>`).join('');
+  observeFade();
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); renderRooms(btn.dataset.filter);
+  });
+});
+
+function renderComplaints() {
+  const list = document.getElementById('complaintList');
+  const steps = ['Submitted','Assigned','In Progress','Resolved'];
+  list.innerHTML = complaints.map(c=>`
+    <div class="complaint-item">
+      <div class="complaint-header">
+        <div class="complaint-title">${c.title}</div>
+        <span class="status-badge ${c.status.replace(' ','-')}">${c.status==='in-progress'?'⚡ In Progress':c.status==='resolved'?'✅ Resolved':'📤 Submitted'}</span>
+      </div>
+      <div class="complaint-cat">🏷️ ${c.cat} · ID ${c.id}</div>
+      <div class="complaint-timeline">${steps.map((s,i)=>`
+        <div class="timeline-step ${i<c.steps?'done':''}">
+          <div class="timeline-dot"></div><div class="timeline-label">${s}</div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+let selectedPriority='medium';
+document.querySelectorAll('.priority-tag').forEach(tag=>{
+  tag.addEventListener('click',()=>{
+    document.querySelectorAll('.priority-tag').forEach(t=>t.classList.remove('selected'));
+    tag.classList.add('selected'); selectedPriority=tag.dataset.priority;
+  });
+});
+
+function submitComplaint() {
+  const cat = document.getElementById('complaintCat').value;
+  const desc = document.getElementById('complaintDesc').value;
+  if(!cat){showToast('Please select a category.','⚠️');return;}
+  if(!desc.trim()){showToast('Please describe the issue.','⚠️');return;}
+  complaints.unshift({id:`#00${complaints.length+3}`,title:desc.substring(0,50),cat,status:'submitted',steps:1});
+  renderComplaints();
+  document.getElementById('complaintCat').value='';
+  document.getElementById('complaintDesc').value='';
+  document.getElementById('pendingCount').textContent=complaints.filter(c=>c.status!=='resolved').length;
+  showToast('Complaint submitted! We\'ll look into it.','✅');
+}
+
+function renderMeals() {
+  const grid = document.getElementById('mealsGrid');
+  const maxV = Math.max(...meals.map(m=>m.votes));
+  grid.innerHTML = meals.map((m,i)=>`
+    <div class="meal-card fade-in">
+      <div class="meal-emoji">${m.emoji}</div>
+      <div class="meal-name">${m.name}</div>
+      <div class="meal-desc">${m.desc}</div>
+      <div class="vote-bar-wrap"><div class="vote-bar" style="width:${Math.round(m.votes/maxV*100)}%"></div></div>
+      <div class="vote-count">${m.votes} votes</div>
+      <div class="emoji-votes">
+        <button class="emoji-btn ${m.userVote==='love'?'voted':''}" onclick="vote(${i},'love')">😊 <span>${Math.floor(m.votes*.6)}</span></button>
+        <button class="emoji-btn ${m.userVote==='ok'?'voted':''}" onclick="vote(${i},'ok')">😐 <span>${Math.floor(m.votes*.3)}</span></button>
+        <button class="emoji-btn ${m.userVote==='bad'?'voted':''}" onclick="vote(${i},'bad')">😞 <span>${Math.floor(m.votes*.1)}</span></button>
+      </div>
+    </div>`).join('');
+  observeFade();
+}
+
+function vote(idx,reaction) {
+  if(meals[idx].userVote===reaction){meals[idx].userVote=null;meals[idx].votes-=1;}
+  else{if(!meals[idx].userVote)meals[idx].votes+=1;meals[idx].userVote=reaction;}
+  renderMeals();
+  if(meals[idx].userVote) showToast(`Voted for ${meals[idx].name}!`,'🍽️');
+}
+
+let calYear=2026, calMonth=4;
+const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderCalendar() {
+  document.getElementById('calMonthYear').textContent=`${monthNames[calMonth]} ${calYear}`;
+  const days=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const first=new Date(calYear,calMonth,1).getDay();
+  const total=new Date(calYear,calMonth+1,0).getDate();
+  const prevTotal=new Date(calYear,calMonth,0).getDate();
+  const today=new Date();
+  const eventDays=events.map(e=>e.day);
+  let html=days.map(d=>`<div class="cal-day-name">${d}</div>`).join('');
+  for(let i=0;i<first;i++) html+=`<div class="cal-day other-month">${prevTotal-first+i+1}</div>`;
+  for(let d=1;d<=total;d++){
+    const isT=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();
+    html+=`<div class="cal-day ${isT?'today':''} ${eventDays.includes(d)?'has-event':''}" onclick="showEventToast(${d})">${d}</div>`;
+  }
+  document.getElementById('calGrid').innerHTML=html;
+  document.getElementById('eventsList').innerHTML=events.map(e=>`
+    <div class="event-item">
+      <div class="event-date-box"><div class="event-date-day">${e.day}</div><div class="event-date-mon">${e.month}</div></div>
+      <div class="event-info"><div class="event-name">${e.name}</div><div class="event-loc">📍 ${e.loc}</div></div>
+      <div><span class="event-cat ${e.cat}">${e.cat}</span><br>
+        <button class="btn btn-outline" style="padding:0.3rem 0.75rem;font-size:0.75rem;margin-top:0.5rem;" onclick="rsvp('${e.name}')">RSVP</button>
+      </div>
+    </div>`).join('');
+}
+
+function showEventToast(day){const ev=events.find(e=>e.day===day);if(ev)showToast(`${ev.name} — ${ev.loc}`,'📅');}
+function rsvp(name){showToast(`RSVP confirmed for ${name}!`,'✅');}
+document.getElementById('prevMonth').addEventListener('click',()=>{calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();});
+document.getElementById('nextMonth').addEventListener('click',()=>{calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();});
+
+document.querySelectorAll('.hobby-tag').forEach(tag=>tag.addEventListener('click',()=>tag.classList.toggle('selected')));
+
+function findMatches() {
+  const res=document.getElementById('matchResults');
+  res.innerHTML='<p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1rem;">✨ Here are your best matches!</p>';
+  [...potentialRoommates].sort((a,b)=>b.compat-a.compat).forEach(r=>{
+    const pct=r.compat;
+    const col=pct>=85?'#5a3fb0':pct>=75?'#7c6dcc':'#9b8edc';
+    res.innerHTML+=`
+    <div class="match-card">
+      <div class="match-avatar" style="background:${r.bg}">${r.avatar}</div>
+      <div class="match-info">
+        <div class="match-name">${r.name}</div>
+        <div class="match-dept">${r.dept}</div>
+        <div class="match-tags">${r.hobbies.map(h=>`<span class="match-tag">${h}</span>`).join('')}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div class="compat-ring" style="background:conic-gradient(${col} 0% ${pct}%,var(--border) ${pct}% 100%)"><span>${pct}%</span></div>
+        <div style="font-size:0.68rem;color:var(--text-muted);margin-top:4px;text-align:center;">Match</div>
+        <button class="btn btn-outline" style="padding:0.25rem 0.6rem;font-size:0.7rem;margin-top:4px;" onclick="showToast('Request sent to ${r.name}!','💜')">Connect</button>
+      </div>
+    </div>`;
+  });
+}
+
+function renderTestimonials() {
+  const track=document.getElementById('testiTrack');
+  const ctrl=document.getElementById('testiControls');
+  track.innerHTML=testimonials.map(t=>`
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"${t.text}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:${t.bg}">${t.avatar}</div>
+        <div><div class="testi-name">${t.name}</div><div class="testi-course">${t.course}</div></div>
+      </div>
+    </div>`).join('');
+  ctrl.innerHTML=testimonials.map((_,i)=>`<button class="testi-dot ${i===0?'active':''}" data-idx="${i}"></button>`).join('');
+  ctrl.querySelectorAll('.testi-dot').forEach(btn=>btn.addEventListener('click',()=>slideTo(parseInt(btn.dataset.idx))));
+}
+
+let testiIdx=0;
+function slideTo(idx) {
+  testiIdx=idx;
+  // Make sliding distance responsive to window size
+  const cardWidth = window.innerWidth <= 600 ? 280 : 340;
+  document.getElementById('testiTrack').style.transform=`translateX(calc(-${idx} * (${cardWidth}px + 1.5rem)))`;
+  document.querySelectorAll('.testi-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+setInterval(()=>{
+  // Handle resize edge cases
+  slideTo((testiIdx+1)%testimonials.length)
+},4200);
+window.addEventListener('resize', () => slideTo(testiIdx));
+
+// Booking
+let currentRoom='';
+function openBooking(room='') {
+  currentRoom=room;
+  document.getElementById('modalRoomTitle').textContent=room?`Book — ${room}`:'Book a Room';
+  document.getElementById('bookingContent').innerHTML=`
+    <div class="modal-form">
+      <label>Full Name</label><input type="text" id="bookName" placeholder="Fatima Khan">
+      <label>Student ID</label><input type="text" id="bookId" placeholder="2024-CS-001">
+      <label>Contact Number</label><input type="text" id="bookPhone" placeholder="+92 300 0000000">
+      <label>Department</label>
+      <select id="bookDept"><option>Computer Science</option><option>Business Administration</option><option>Engineering</option><option>Medicine</option><option>Arts & Humanities</option></select>
+      <label>Check-in Date</label><input type="date" id="bookDate">
+      <div style="display:flex;gap:0.75rem;margin-top:0.5rem;">
+        <button class="btn btn-outline" style="flex:1;justify-content:center;" onclick="closeBooking()">Cancel</button>
+        <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="confirmBooking()">Confirm →</button>
+      </div>
+    </div>`;
+  document.getElementById('bookingModal').classList.add('open');
+}
+function closeBooking(){document.getElementById('bookingModal').classList.remove('open');}
+function confirmBooking() {
+  const name=document.getElementById('bookName').value;
+  const id=document.getElementById('bookId').value;
+  if(!name.trim()||!id.trim()){showToast('Please fill all required fields.','⚠️');return;}
+  document.getElementById('bookingContent').innerHTML=`
+    <div class="success-anim">
+      <div class="big-emoji">🎉</div>
+      <h3 style="font-weight:600;margin:1rem 0 0.5rem;">Booking Confirmed!</h3>
+      <p style="color:var(--text-muted);font-size:0.9rem;">Welcome to HostelHive, <strong>${name}</strong>! Check your email for details.</p>
+      <button class="btn btn-primary" style="margin-top:1.5rem;justify-content:center;" onclick="closeBooking()">Done ✓</button>
+    </div>`;
+  showToast(`Room booked for ${name}!`,'🛏️');
+}
+
+// Toast
+function showToast(msg,icon='🔔') {
+  const container=document.getElementById('toastContainer');
+  const toast=document.createElement('div');
+  toast.className='toast';
+  toast.innerHTML=`<span class="toast-icon">${icon}</span><span>${msg}</span>`;
+  container.appendChild(toast);
+  setTimeout(()=>{toast.classList.add('exit');setTimeout(()=>toast.remove(),400);},3500);
+}
+
+// Chatbot
+const chatbotFab=document.getElementById('chatbotFab');
+const chatbotWindow=document.getElementById('chatbotWindow');
+chatbotFab.addEventListener('click',()=>{chatbotWindow.classList.toggle('open');if(chatbotWindow.classList.contains('open')&&document.getElementById('chatMessages').children.length===0)initChat();});
+document.getElementById('chatbotClose').addEventListener('click',()=>chatbotWindow.classList.remove('open'));
+
+function initChat(){addBot('Hi! 👋 I\'m your Hive Assistant. How can I help you today?');renderSuggs();}
+function renderSuggs(){document.getElementById('chatSuggestions').innerHTML=chatSuggestions.map(s=>`<button class="chat-suggest" onclick="sendChat('${s}')">${s}</button>`).join('');}
+
+function addBot(text) {
+  const time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const d=document.createElement('div'); d.className='msg bot';
+  d.innerHTML=`<div class="msg-bubble">${text}</div><div class="msg-time">${time}</div>`;
+  document.getElementById('chatMessages').appendChild(d);
+  document.getElementById('chatMessages').scrollTop=9999;
+}
+function addUser(text) {
+  const time=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  const d=document.createElement('div'); d.className='msg user';
+  d.innerHTML=`<div class="msg-bubble">${text}</div><div class="msg-time">${time}</div>`;
+  document.getElementById('chatMessages').appendChild(d);
+  document.getElementById('chatMessages').scrollTop=9999;
+}
+function showTyping(){const d=document.createElement('div');d.className='msg bot';d.id='typing';d.innerHTML=`<div class="msg-bubble" style="padding:0;background:var(--lav-light)"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;document.getElementById('chatMessages').appendChild(d);document.getElementById('chatMessages').scrollTop=9999;}
+function removeTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+function getReply(msg){
+  const m=msg.toLowerCase();
+  if(m.includes('curfew')||m.includes('timing')||m.includes('time')) return chatResponses.curfew;
+  if(m.includes('menu')||m.includes('food')||m.includes('meal')||m.includes('eat')) return chatResponses.menu;
+  if(m.includes('book')||m.includes('room')) return chatResponses.book;
+  if(m.includes('complaint')||m.includes('issue')||m.includes('problem')||m.includes('file')) return chatResponses.complaint;
+  if(m.includes('wifi')||m.includes('internet')||m.includes('password')) return chatResponses.wifi;
+  if(m.includes('fee')||m.includes('pay')) return chatResponses.fee;
+  if(m.includes('laundry')||m.includes('wash')) return chatResponses.laundry;
+  if(m.includes('emergency')||m.includes('urgent')) return chatResponses.emergency;
+  return "I'm not sure about that, but the warden's office can help! Anything else? 💜";
+}
+function sendChat(text) {
+  if(!text.trim()) return;
+  addUser(text); document.getElementById('chatInput').value='';
+  showTyping();
+  setTimeout(()=>{removeTyping();addBot(getReply(text));},900+Math.random()*500);
+}
+document.getElementById('chatSend').addEventListener('click',()=>sendChat(document.getElementById('chatInput').value));
+document.getElementById('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat(document.getElementById('chatInput').value);});
+
+// Dark mode
+const themeToggle=document.getElementById('themeToggle');
+const savedTheme=localStorage.getItem('hiveTheme')||'light';
+document.documentElement.setAttribute('data-theme',savedTheme);
+themeToggle.addEventListener('click',()=>{
+  const next=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',next);
+  localStorage.setItem('hiveTheme',next);
+  scene.background=new THREE.Color(next==='dark'?0x080418:0x0d0820);
+  scene.fog=new THREE.FogExp2(next==='dark'?0x080418:0x0d0820,0.032);
+});
+
+// Counter animation
+function animateCounters(){
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const target=parseInt(el.dataset.count); let current=0;
+    const step=Math.ceil(target/60);
+    const timer=setInterval(()=>{
+      current=Math.min(current+step,target);
+      el.textContent=current.toLocaleString()+(el.dataset.count==='98'?'%':'+');
+      if(current>=target)clearInterval(timer);
+    },16);
+  });
+}
+
+// Scroll observer
+function observeFade(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.progress-fill').forEach(b=>{setTimeout(()=>{b.style.width=b.dataset.width;},200);});
+      }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+// Nav highlight
+const navSections=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  navSections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)cur=s.id;});
+  navAs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+// Notifications
+document.getElementById('notifBtn').addEventListener('click',()=>{
+  showToast('3 new notifications: Maintenance, Cultural Fest, Menu Update','🔔');
+  document.getElementById('notifCount').style.display='none';
+});
+
+// Modal dismiss
+document.getElementById('bookingModal').addEventListener('click',function(e){if(e.target===this)closeBooking();});
+
+// INIT
+renderRooms(); renderComplaints(); renderMeals(); renderCalendar(); renderTestimonials(); observeFade();
+
+// Hero counter trigger
+new IntersectionObserver(entries=>{if(entries[0].isIntersecting){animateCounters();}},{threshold:0.3}).observe(document.getElementById('home'));
+
+setTimeout(()=>showToast('Welcome to HostelHive! 🐝 Book your room today.','🏠'),1800);
+</script>
+</body>
+</html>
