@@ -1469,5 +1469,187 @@ new IntersectionObserver(entries=>{if(entries[0].isIntersecting){animateCounters
 
 setTimeout(()=>showToast('Welcome to HostelHive! 🐝 Book your room today.','🏠'),1800);
 </script>
+
+  <!-- PAYMENT SECTION START -->
+<section id="payment" class="payment-section">
+  <div class="container">
+    <h2 class="payment-title">Payment</h2>
+    <p class="payment-subtitle">Pay your hostel fee securely</p>
+
+    <form class="payment-form" onsubmit="return false;">
+      
+      <div class="payment-methods">
+        <label class="payment-method">
+          <input type="radio" name="method" value="card" checked>
+          <span>Debit / Credit Card</span>
+        </label>
+        <label class="payment-method">
+          <input type="radio" name="method" value="jazzcash">
+          <span>JazzCash</span>
+        </label>
+        <label class="payment-method">
+          <input type="radio" name="method" value="easypaisa">
+          <span>EasyPaisa</span>
+        </label>
+      </div>
+
+      <div class="payment-fields" id="card-fields">
+        <div class="form-group">
+          <label for="cardholder">Cardholder Name</label>
+          <input type="text" id="cardholder" name="cardholder" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label for="cardnumber">Card Number</label>
+          <input type="text" id="cardnumber" name="cardnumber" placeholder="0000 0000 0000 0000" inputmode="numeric" maxlength="19" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="expiry">Expiry Date</label>
+            <input type="text" id="expiry" name="expiry" placeholder="MM/YY" maxlength="5" required>
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="password" id="cvv" name="cvv" placeholder="***" maxlength="4" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="payment-fields hidden" id="wallet-fields">
+        <div class="form-group">
+          <label for="wallet">JazzCash / EasyPaisa Number</label>
+          <input type="tel" id="wallet" name="wallet" placeholder="03XX-XXXXXXX" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn payment-btn">Proceed Payment</button>
+    </form>
+  </div>
+</section>
+
+<style>
+/* PAYMENT SECTION - scoped to #payment so it won't touch other sections */
+#payment.payment-section{
+  padding: 60px 0;
+  background: inherit; /* matches your site background */
+}
+#payment .container{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+#payment .payment-title{
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  margin: 0 0 8px;
+  text-align: center;
+}
+#payment .payment-subtitle{
+  margin: 0 0 24px;
+  text-align: center;
+  opacity: 0.8;
+}
+#payment .payment-form{
+  background: transparent;
+}
+#payment .payment-methods{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+#payment .payment-method{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid currentColor;
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.9;
+  font-size: 14px;
+}
+#payment .payment-method input{
+  accent-color: currentColor;
+}
+#payment .form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+#payment .form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+#payment label{
+  font-size: 14px;
+  font-weight: 600;
+}
+#payment input[type="text"],
+#payment input[type="password"],
+#payment input[type="tel"]{
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 10px;
+  font-size: 16px;
+  background: transparent;
+  color: inherit;
+}
+@media (max-width: 600px){
+  #payment .form-row{
+    grid-template-columns: 1fr;
+  }
+  #payment .payment-methods{
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+#payment .payment-btn{
+  width: 100%;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+#payment .hidden{
+  display: none !important;
+}
+</style>
+
+<script>
+/* Simple toggle: show card fields or wallet number only. No other functionality changed. */
+(function(){
+  const methods = document.querySelectorAll('#payment input[name="method"]');
+  const cardFields = document.getElementById('card-fields');
+  const walletFields = document.getElementById('wallet-fields');
+  const walletInput = document.getElementById('wallet');
+  
+  function updateFields(){
+    const val = document.querySelector('#payment input[name="method"]:checked').value;
+    if(val === 'card'){
+      cardFields.classList.remove('hidden');
+      walletFields.classList.add('hidden');
+      walletInput.required = false;
+      document.getElementById('cardholder').required = true;
+    } else {
+      cardFields.classList.add('hidden');
+      walletFields.classList.remove('hidden');
+      walletInput.required = true;
+      document.getElementById('cardholder').required = false;
+    }
+  }
+  methods.forEach(m => m.addEventListener('change', updateFields));
+  updateFields();
+})();
+</script>
+<!-- PAYMENT SECTION END -->
+
 </body>
 </html>
