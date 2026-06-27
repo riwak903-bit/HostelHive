@@ -754,7 +754,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
         <div class="footer-heading">Support</div>
         <ul class="footer-links">
           <li><a href="#complaints">Submit Complaint</a></li>
-          <li><a href="#">Fee Payment</a></li>
+          <li><a href="javascript:void(0)" onclick="showPaymentSection()">Fee Payment</a></li>
           <li><a href="#">Leave Form</a></li>
           <li><a href="#">Emergency</a></li>
         </ul>
@@ -1650,6 +1650,10 @@ setTimeout(()=>showToast('Welcome to HostelHive! üêù Book your room today.','ü
 })();
 </script>
 <!-- PAYMENT SECTION END -->
-
+<script>
+function showPaymentSection() {
+  document.getElementById('payment').scrollIntoView({behavior: 'smooth'});
+}
+</script>
 </body>
 </html>
